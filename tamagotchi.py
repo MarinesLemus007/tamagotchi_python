@@ -1,20 +1,30 @@
 class Tamagotchi():
     def __init__(self,nombre):
         self.nombre = nombre
-        self.hambre = 100
+        self.hambre = 30
         self.energia = 100
         self.estado = 'huevo'
     
     def seriallize(self):
-        return {
-            "nombre": self.nombre,
-            "hambre": self.hambre,
-            "energia": self.energia,
-            "estado": self.estado
-        } 
-    
+        if self.hambre <= 20 or self.energia <= 20:
+            return {"mensaje":f'{self.nombre} ha muerto :('}
+        else:
+            return {
+                "nombre": self.nombre,
+                "hambre": self.hambre,
+                "energia": self.energia,
+                "estado": self.estado
+            } 
+        
+    def crecer(self):
+        if self.estado == 'huevo':
+            self.estado = 'ninio'
+        elif self.estado == 'ninio':
+            self.estado = 'adolescente'
+        elif self.estado == 'adolescente':
+            self.estado = 'adulto'
+        else:
+            self.estado = 'adulto'
+            return f'{self.nombre} no puede crecer más, ya está grande'
 
-tama = Tamagotchi("patito jose")
-#print(tama)
-#print(tama.nombre)
-print(tama.seriallize())
+        return f'{self.nombre} ha pasado a etapa {self.estado}'
