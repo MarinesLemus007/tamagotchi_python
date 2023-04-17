@@ -6,7 +6,7 @@ class Tamagotchi():
         self.estado = 'huevo'
     
     def seriallize(self):
-        if self.hambre <= 20 or self.energia <= 20:
+        if self.hambre <= 0 or self.energia <= 0:
             return {"mensaje":f'{self.nombre} ha muerto :('}
         else:
             return {
